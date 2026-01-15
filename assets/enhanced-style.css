@@ -2192,3 +2192,390 @@ h3, h4, h5, h6 {
     width: 200px;
     transform: rotate(180deg);
 }
+
+/* Creator Photo Styling */
+.creator-photo-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.creator-photo {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--color-primary-neon);
+    box-shadow: 
+        0 0 30px var(--color-primary-neon),
+        0 0 60px var(--color-accent-purple),
+        inset 0 0 20px rgba(0, 212, 255, 0.2);
+    animation: photo-glow 3s ease-in-out infinite, photo-float 4s ease-in-out infinite;
+    transition: all 0.4s ease;
+}
+
+.creator-photo:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 
+        0 0 50px var(--color-primary-neon),
+        0 0 100px var(--color-accent-purple),
+        0 20px 60px rgba(0, 212, 255, 0.4);
+    border-color: var(--color-accent-purple);
+}
+
+@keyframes photo-glow {
+    0%, 100% {
+        box-shadow: 
+            0 0 20px var(--color-primary-neon),
+            0 0 40px var(--color-accent-purple);
+    }
+    50% {
+        box-shadow: 
+            0 0 40px var(--color-primary-neon),
+            0 0 80px var(--color-accent-purple),
+            0 0 120px rgba(139, 92, 246, 0.4);
+    }
+}
+
+@keyframes photo-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ========================================
+   ENHANCED COOL EFFECTS - MAXIMUM INTENSITY
+   ======================================== */
+
+/* Intense Glitch Text Animation */
+@keyframes intense-glitch {
+    0%, 100% { transform: translate(0); }
+    10% { transform: translate(-3px, 3px); }
+    20% { transform: translate(3px, -3px); }
+    30% { transform: translate(-3px, -3px); }
+    40% { transform: translate(3px, 3px); }
+    50% { transform: translate(-3px, 0); }
+    60% { transform: translate(3px, 0); }
+}
+
+/* Cyberpunk Grid Background */
+@keyframes grid-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-move 20s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Enhanced Logo Effects */
+.logo-primary {
+    animation: vortex-spin-intense 4s ease-in-out infinite, logo-glow-pulse 2s ease-in-out infinite !important;
+    filter: drop-shadow(0 0 30px rgba(0, 212, 255, 1)) brightness(1.2) !important;
+}
+
+.logo-primary:hover {
+    filter: drop-shadow(0 0 50px rgba(0, 212, 255, 1)) brightness(1.5) !important;
+    transform: scale(1.15) rotate(15deg) !important;
+}
+
+@keyframes vortex-spin-intense {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(90deg) scale(1.05); }
+    50% { transform: rotate(180deg) scale(1.1); }
+    75% { transform: rotate(270deg) scale(1.05); }
+}
+
+@keyframes logo-glow-pulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8)) brightness(1); 
+    }
+    50% { 
+        filter: drop-shadow(0 0 50px rgba(0, 212, 255, 1)) drop-shadow(0 0 80px rgba(139, 92, 246, 0.6)) brightness(1.3); 
+    }
+}
+
+/* Chromatic Aberration on Headings */
+.hero-title, .page-title {
+    animation: chromatic-shift 3s ease-in-out infinite !important;
+    position: relative;
+}
+
+@keyframes chromatic-shift {
+    0%, 100% { 
+        text-shadow: 
+            -2px 0 #ff00ff, 
+            2px 0 #00ffff,
+            0 0 20px var(--color-primary-neon) !important;
+    }
+    50% { 
+        text-shadow: 
+            2px 0 #ff00ff, 
+            -2px 0 #00ffff,
+            0 0 40px var(--color-primary-neon) !important;
+    }
+}
+
+/* Enhanced Card Hover Effects */
+.link-card, .featured-card, .tool, .research-card, .about-card, .creator-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.link-card::before, .featured-card::before, .tool::before, .about-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(0, 212, 255, 0.2) 50%,
+        transparent 70%
+    );
+    transform: rotate(45deg);
+    animation: shine-sweep 4s infinite;
+}
+
+@keyframes shine-sweep {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.link-card:hover, .featured-card:hover, .tool:hover, .about-card:hover, .creator-card:hover {
+    transform: translateY(-15px) scale(1.03) rotate(1deg) !important;
+    box-shadow: 
+        0 15px 60px rgba(0, 212, 255, 0.4),
+        0 0 80px rgba(139, 92, 246, 0.3),
+        inset 0 0 30px rgba(0, 212, 255, 0.15) !important;
+}
+
+/* Neon Button Ripple Effect */
+.cta-button, .calc-btn, .download-btn, .paper-link {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease !important;
+}
+
+.cta-button::after, .calc-btn::after, .download-btn::after, .paper-link::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.cta-button:active::after, .calc-btn:active::after, .download-btn:active::after {
+    width: 400px;
+    height: 400px;
+}
+
+.cta-button:hover, .calc-btn:hover, .download-btn:hover, .paper-link:hover {
+    transform: scale(1.08) translateY(-2px) !important;
+    box-shadow: 
+        0 0 30px var(--color-primary-neon),
+        0 0 60px var(--color-primary-neon),
+        0 10px 40px rgba(0, 212, 255, 0.4),
+        inset 0 0 20px rgba(0, 212, 255, 0.3) !important;
+    animation: button-pulse 1s ease-in-out infinite;
+}
+
+@keyframes button-pulse {
+    0%, 100% { box-shadow: 0 0 20px var(--color-primary-neon); }
+    50% { box-shadow: 0 0 40px var(--color-primary-neon), 0 0 60px var(--color-accent-purple); }
+}
+
+/* Enhanced Navigation Glow */
+.nav-link {
+    position: relative;
+    transition: all 0.3s ease !important;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-primary-neon), var(--color-accent-purple), transparent);
+    transition: all 0.4s ease;
+    box-shadow: 0 0 15px var(--color-primary-neon);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::before {
+    width: 120%;
+}
+
+.nav-link:hover {
+    text-shadow: 
+        0 0 15px var(--color-primary-neon),
+        0 0 30px var(--color-primary-neon),
+        0 0 45px var(--color-accent-purple) !important;
+    transform: translateY(-3px) scale(1.05) !important;
+}
+
+/* Vortex Background Spiral */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1000px;
+    height: 1000px;
+    background: radial-gradient(
+        circle,
+        rgba(0, 212, 255, 0.15) 0%,
+        rgba(139, 92, 246, 0.1) 50%,
+        transparent 70%
+    );
+    transform: translate(-50%, -50%);
+    animation: vortex-spiral 25s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes vortex-spiral {
+    0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); opacity: 0.2; }
+    50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.3); opacity: 0.3; }
+    100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); opacity: 0.2; }
+}
+
+/* Glowing Border Pulse */
+@keyframes border-glow-intense {
+    0%, 100% { 
+        box-shadow: 
+            0 0 10px var(--color-primary-neon),
+            inset 0 0 10px var(--color-primary-neon);
+    }
+    50% { 
+        box-shadow: 
+            0 0 30px var(--color-primary-neon),
+            0 0 60px var(--color-accent-purple),
+            inset 0 0 20px var(--color-primary-neon);
+    }
+}
+
+.research-card, .poster-item, .paper-card {
+    animation: border-glow-intense 4s ease-in-out infinite;
+}
+
+/* Enhanced Status Badge */
+.status-badge, .role-badge, .category-badge {
+    animation: badge-pulse-intense 2s ease-in-out infinite, badge-float 3s ease-in-out infinite !important;
+    box-shadow: 
+        0 0 30px rgba(0, 212, 255, 0.8),
+        inset 0 0 15px rgba(0, 212, 255, 0.4) !important;
+}
+
+@keyframes badge-pulse-intense {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 40px rgba(0, 212, 255, 1), 0 0 60px rgba(139, 92, 246, 0.6);
+    }
+}
+
+@keyframes badge-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* Poster Gallery Hover Effect */
+.poster-item:hover {
+    transform: scale(1.08) rotate(2deg) !important;
+    box-shadow: 
+        0 20px 80px rgba(0, 212, 255, 0.5),
+        0 0 100px rgba(139, 92, 246, 0.4) !important;
+    z-index: 10;
+}
+
+/* Floating Vortex Decorations Enhancement */
+.floating-vortex, .vortex-decoration {
+    animation: float-vortex 20s ease-in-out infinite, spin-glow 15s linear infinite !important;
+    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6)) !important;
+}
+
+@keyframes spin-glow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6)) brightness(1);
+        transform: rotate(0deg);
+    }
+    50% { 
+        filter: drop-shadow(0 0 40px rgba(0, 212, 255, 1)) brightness(1.3);
+        transform: rotate(180deg);
+    }
+}
+
+/* Text Selection Glow */
+::selection {
+    background: rgba(0, 212, 255, 0.4);
+    color: #ffffff;
+    text-shadow: 0 0 10px var(--color-primary-neon);
+}
+
+/* Scrollbar Glow Enhancement */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--color-primary-neon), var(--color-accent-purple));
+    box-shadow: 
+        0 0 10px var(--color-primary-neon),
+        inset 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--color-accent-purple), var(--color-primary-neon));
+    box-shadow: 
+        0 0 20px var(--color-primary-neon),
+        0 0 30px var(--color-accent-purple);
+}
+
+/* Intense Scanline Effect */
+.scanlines::before {
+    animation: scanline-move 10s linear infinite !important;
+    opacity: 0.15 !important;
+}
+
+@keyframes scanline-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100vh; }
+}
+
+/* GIF Decoration Enhancements */
+.gif-decoration {
+    animation: gif-float 15s ease-in-out infinite, gif-pulse 3s ease-in-out infinite !important;
+    filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.5)) !important;
+}
+
+@keyframes gif-float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    25% { transform: translateY(-15px) translateX(10px); }
+    50% { transform: translateY(-5px) translateX(-10px); }
+    75% { transform: translateY(-20px) translateX(5px); }
+}
+
+@keyframes gif-pulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
