@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1142 Combos Calculator | Substance Interaction Research</title>
+    <meta name="description" content="Research tool for understanding substance combinations and interactions. Educational purposes only.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="stylesheet" href="assets/css/1142-ritual-system.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--near-black);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: all;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--vortex-cyan);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--vortex-cyan);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--vortex-cyan), var(--cyber-pink), var(--vortex-cyan));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s linear infinite;
+        }
+
+        .warning-banner {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(236, 72, 153, 0.2));
+            border: 2px solid var(--flashing-red);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .warning-banner h3 {
+            color: var(--flashing-red);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .calculator-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .combo-selector {
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid rgba(0, 240, 255, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .combo-selector h2 {
+            color: var(--vortex-cyan);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px var(--vortex-cyan);
+        }
+
+        .substance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .substance-btn {
+            padding: 1rem;
+            background: rgba(0, 240, 255, 0.1);
+            border: 2px solid rgba(0, 240, 255, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .substance-btn:hover {
+            background: rgba(0, 240, 255, 0.2);
+            border-color: var(--vortex-cyan);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        }
+
+        .substance-btn.selected {
+            background: linear-gradient(135deg, var(--vortex-cyan), var(--cyber-pink));
+            border-color: var(--cyber-pink);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+        }
+
+        .results-panel {
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid rgba(236, 72, 153, 0.5);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .results-panel.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .interaction-card {
+            background: rgba(0, 240, 255, 0.05);
+            border-left: 4px solid var(--vortex-cyan);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+
+        .interaction-card h3 {
+            color: var(--vortex-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .risk-level {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .risk-low {
+            background: rgba(74, 222, 128, 0.2);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+        }
+
+        .risk-moderate {
+            background: rgba(252, 211, 77, 0.2);
+            color: var(--golden-glow);
+            border: 1px solid var(--golden-glow);
+        }
+
+        .risk-high {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--flashing-red);
+            border: 1px solid var(--flashing-red);
+        }
+
+        .coming-soon {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(109, 40, 217, 0.1), rgba(0, 240, 255, 0.1));
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .coming-soon h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--vortex-cyan);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .substance-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="calculator.html">Calculator</a></li>
+            <li><a href="combos.html">Combos</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <h1>1142 COMBOS CALCULATOR</h1>
+        <p style="color: rgba(255, 255, 255, 0.8); max-width: 700px; margin: 0 auto;">
+            Research tool for understanding substance interactions based on documented experiences and scientific literature.
+        </p>
+    </div>
+
+    <div class="warning-banner">
+        <h3>⚠️ CRITICAL DISCLAIMER ⚠️</h3>
+        <p><strong>This tool is for EDUCATIONAL and RESEARCH purposes ONLY.</strong></p>
+        <p style="margin-top: 1rem;">This is NOT medical advice. Substance combinations can be extremely dangerous or fatal. Always consult medical professionals. 1142 Labs does not condone illegal drug use.</p>
+        <p style="margin-top: 1rem; font-weight: bold; color: var(--flashing-red);">
+            IF YOU OR SOMEONE YOU KNOW IS IN CRISIS, CALL 911 IMMEDIATELY.
+        </p>
+    </div>
+
+    <div class="calculator-container">
+        <div class="combo-selector ritual-card">
+            <h2>Select Substances to Analyze</h2>
+            <p style="margin-bottom: 2rem; color: rgba(255, 255, 255, 0.7);">
+                Choose two or more substances to view documented interactions and research findings.
+            </p>
+
+            <div class="substance-grid">
+                <button class="substance-btn" data-substance="methylphenidate">Methylphenidate</button>
+                <button class="substance-btn" data-substance="lsd">LSD</button>
+                <button class="substance-btn" data-substance="psilocybin">Psilocybin</button>
+                <button class="substance-btn" data-substance="mdma">MDMA</button>
+                <button class="substance-btn" data-substance="dmt">DMT</button>
+                <button class="substance-btn" data-substance="mescaline">Mescaline</button>
+                <button class="substance-btn" data-substance="amphetamine">Amphetamine</button>
+                <button class="substance-btn" data-substance="cannabis">Cannabis</button>
+                <button class="substance-btn" data-substance="nicotine">Nicotine</button>
+                <button class="substance-btn" data-substance="caffeine">Caffeine</button>
+            </div>
+
+            <button id="analyze-btn" class="cosmic-btn" style="width: 100%; margin-top: 1rem;">
+                ANALYZE COMBINATION
+            </button>
+        </div>
+
+        <div id="results" class="results-panel">
+            <h2 style="color: var(--cyber-pink); font-family: 'Orbitron', sans-serif; margin-bottom: 1.5rem;">
+                Interaction Analysis
+            </h2>
+            <div id="results-content"></div>
+        </div>
+
+        <div class="coming-soon ritual-card">
+            <h2>🔬 ADVANCED FEATURES COMING SOON 🔬</h2>
+            <p style="font-size: 1.2rem; margin: 2rem 0; color: rgba(255, 255, 255, 0.8);">
+                This calculator is currently in development. Future versions will include:
+            </p>
+            <ul style="list-style: none; padding: 0; max-width: 600px; margin: 2rem auto; text-align: left;">
+                <li style="margin: 1rem 0;">✓ Comprehensive interaction database</li>
+                <li style="margin: 1rem 0;">✓ Dosage recommendations from research</li>
+                <li style="margin: 1rem 0;">✓ Timeline and duration calculations</li>
+                <li style="margin: 1rem 0;">✓ Safety protocols and harm reduction info</li>
+                <li style="margin: 1rem 0;">✓ References to peer-reviewed studies</li>
+                <li style="margin: 1rem 0;">✓ Experience reports from 1142 research</li>
+            </ul>
+            <p style="margin-top: 2rem; color: var(--vortex-cyan); font-weight: bold;">
+                Check back for updates or explore our existing research papers.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 1142 LABS | Combos Calculator</p>
+        <p class="cosmic-rune">═══◆═══</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">For Educational and Research Purposes Only</p>
+    </footer>
+
+    <script src="assets/js/1142-ritual-effects.js"></script>
+    <script>
+        // Substance selection logic
+        const substanceBtns = document.querySelectorAll('.substance-btn');
+        const analyzeBtn = document.getElementById('analyze-btn');
+        const resultsPanel = document.getElementById('results');
+        const resultsContent = document.getElementById('results-content');
+        let selectedSubstances = [];
+
+        substanceBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const substance = btn.dataset.substance;
+                
+                if (btn.classList.contains('selected')) {
+                    btn.classList.remove('selected');
+                    selectedSubstances = selectedSubstances.filter(s => s !== substance);
+                } else {
+                    btn.classList.add('selected');
+                    selectedSubstances.push(substance);
+                }
+            });
+        });
+
+        analyzeBtn.addEventListener('click', () => {
+            if (selectedSubstances.length < 2) {
+                alert('Please select at least 2 substances to analyze.');
+                return;
+            }
+
+            // Show results panel
+            resultsPanel.classList.add('active');
+            
+            // Generate results (placeholder for now)
+            resultsContent.innerHTML = `
+                <div class="interaction-card">
+                    <h3>Selected Combination</h3>
+                    <p><strong>${selectedSubstances.join(' + ')}</strong></p>
+                    <span class="risk-level risk-moderate">⚠️ RESEARCH IN PROGRESS</span>
+                </div>
+                
+                <div class="interaction-card">
+                    <h3>Current Status</h3>
+                    <p>Detailed interaction data for this combination is currently being compiled from 1142 Labs research archives and scientific literature.</p>
+                    <p style="margin-top: 1rem;">Please refer to our <a href="research.html" style="color: var(--vortex-cyan);">Research Papers</a> for documented findings on individual substances and select combinations.</p>
+                </div>
+
+                <div class="interaction-card">
+                    <h3>General Safety Reminder</h3>
+                    <p>• Start with the lowest possible doses</p>
+                    <p>• Never combine substances without thorough research</p>
+                    <p>• Have a sober trip sitter present</p>
+                    <p>• Know the signs of medical emergencies</p>
+                    <p>• Test your substances when possible</p>
+                </div>
+            `;
+
+            // Scroll to results
+            resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    </script>
+</body>
+</html>

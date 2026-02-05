@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <link rel="icon" type="image/gif" href="/favicon.gif">
+    <link rel="shortcut icon" type="image/gif" href="/favicon.gif">
+    <meta name="description" content="Access 20 breakthrough research papers by Cole EverDark covering neurodevelopment, methylphenidate, amphetamines, psychedelics, and health studies.">
+    <meta name="keywords" content="research papers, neuroscience, methylphenidate, amphetamines, LSD research, autism, down syndrome">
+    <meta property="og:title" content="Research - 1142 Labs">
+    <meta property="og:description" content="20 breakthrough research papers in neuroscience and pharmacology.">
+    <link rel="canonical" href="https://www.1142labs.com/research.html">
+    <title>Research - 1142 Labs Breakthroughs</title>
+    
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/enhanced-style.css">
+    <link rel="stylesheet" href="/assets/glitch-fonts.css">
+    <script src="/assets/age-verification.js"></script>
+    
+    <style>
+        /* Enhanced Gallery Styles */
+        .breakthrough-gallery {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .gallery-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6));
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            color: var(--color-primary-neon);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+        
+        .filter-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            border-color: rgba(0, 212, 255, 0.6);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%);
+            border-color: var(--color-primary-neon);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            background: rgba(5, 5, 16, 0.8);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 12px;
+            color: var(--color-compliant-text);
+            font-size: 1em;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-primary-neon);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-primary-neon);
+            font-size: 1.2em;
+        }
+        
+        .papers-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .paper-item {
+            background: linear-gradient(135deg, rgba(5, 5, 16, 0.95) 0%, rgba(10, 10, 26, 0.95) 100%);
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .paper-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+        
+        .paper-item:hover::before {
+            opacity: 1;
+            animation: shine 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .paper-item:hover {
+            border-color: var(--color-primary-neon);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .paper-category {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            border-radius: 6px;
+            color: #8B5CF6;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        
+        .paper-title {
+            font-size: 1.3em;
+            color: var(--color-primary-neon);
+            margin-bottom: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .paper-description {
+            color: var(--color-compliant-text);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        
+        .paper-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        .paper-author {
+            color: rgba(0, 212, 255, 0.7);
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        .paper-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            border: 2px solid rgba(0, 212, 255, 0.4);
+            border-radius: 8px;
+            color: var(--color-primary-neon);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .action-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%);
+            border-color: var(--color-primary-neon);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .action-btn.primary {
+            background: linear-gradient(135deg, var(--color-primary-neon) 0%, #8B5CF6 100%);
+            border-color: var(--color-primary-neon);
+            color: #000;
+        }
+        
+        .action-btn.primary:hover {
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+        }
+        
+        .stats-banner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+        
+        .stat-box {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            border-color: var(--color-primary-neon);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            color: var(--color-primary-neon);
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+        
+        .stat-label {
+            color: var(--color-compliant-text);
+            font-size: 0.9em;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--color-compliant-text);
+        }
+        
+        .no-results h3 {
+            color: var(--color-primary-neon);
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        /* Modal for PDF Preview */
+        .pdf-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            padding: 20px;
+        }
+        
+        .pdf-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            width: 100%;
+            max-width: 1200px;
+            height: 90vh;
+            background: rgba(10, 10, 26, 0.98);
+            border: 2px solid var(--color-primary-neon);
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 0 60px rgba(0, 212, 255, 0.6);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .modal-title {
+            color: var(--color-primary-neon);
+            font-size: 1.3em;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .close-modal {
+            background: rgba(255, 0, 0, 0.2);
+            border: 2px solid rgba(255, 0, 0, 0.5);
+            color: #ff0000;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            background: rgba(255, 0, 0, 0.4);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            height: calc(90vh - 100px);
+            border: none;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .papers-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-controls {
+                flex-direction: column;
+            }
+            
+            .filter-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="scanlines">
+    <!-- Floating Animated Vortex Decorations -->
+    <img src="/assets/animations/vortex_transparent_main.webp" class="floating-vortex top-left spin-slow" alt="">
+    <img src="/assets/animations/vortex_neon_glow.webp" class="floating-vortex top-right spin-reverse" alt="">
+    <img src="/assets/animations/vortex_spin_1.gif" class="gif-decoration corner-tl" alt="">
+    <img src="/assets/animations/neon_chaos_1.gif" class="gif-decoration corner-br" alt="">
+    <div class="cosmic-background"></div>
+
+    <header class="header-nav">
+        <div class="logo-container">
+            <div class="logo-showcase">
+                <img src="/assets/1142labs-new-logo.png" alt="1142 Labs Final Logo" class="logo-primary">
+            </div>
+            <div class="header-text">
+                <h1 class="neon-text glitch-flicker">1142 LABS</h1>
+                <p class="tagline">Tomorrow's Solutions Today</p>
+            </div>
+        </div>
+        <nav class="skeleton-menu">
+            <a href="index.html" class="nav-link neon-text">HOME</a>
+            <a href="about.html" class="nav-link neon-text">ABOUT</a>
+            <a href="research.html" class="nav-link neon-text active">RESEARCH</a>
+            <a href="creators.html" class="nav-link neon-text">CREATORS</a>
+            <a href="resources.html" class="nav-link neon-text">RESOURCES</a>
+            <a href="calculator.html" class="nav-link neon-text">CALCULATOR</a>
+            <a href="posters.html" class="nav-link neon-text">POSTERS</a>
+        </nav>
+    </header>
+
+    <main class="content-container">
+        <div class="breakthrough-gallery">
+            <!-- Gallery Header with Logo -->
+            <div class="gallery-header">
+                <img src="/assets/1142labs-new-logo.png" alt="1142 Labs" class="gallery-logo">
+                <h1 class="page-title glitch-flicker">Breakthrough Gallery</h1>
+                <p class="page-subtitle">20 Comprehensive Studies by Cole EverDark and the 1142 Labs Collective</p>
+            </div>
+
+            <!-- Stats Banner -->
+            <div class="stats-banner">
+                <div class="stat-box">
+                    <div class="stat-number">20</div>
+                    <div class="stat-label">Research Papers</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">128MB</div>
+                    <div class="stat-label">Total Archive</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Potential Impact</div>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search research papers...">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="gallery-controls">
+                <button class="filter-btn active" data-filter="all">All Papers</button>
+                <button class="filter-btn" data-filter="neurodevelopmental">Neurodevelopmental</button>
+                <button class="filter-btn" data-filter="methylphenidate">Methylphenidate</button>
+                <button class="filter-btn" data-filter="amphetamine">Amphetamine</button>
+                <button class="filter-btn" data-filter="consciousness">Consciousness</button>
+                <button class="filter-btn" data-filter="health">Health & Safety</button>
+            </div>
+
+            <!-- Papers Gallery Grid -->
+            <div class="papers-gallery" id="papersGallery">
+                <!-- Neurodevelopmental Studies -->
+                <div class="paper-item" data-category="neurodevelopmental">
+                    <span class="paper-category">Neurodevelopmental</span>
+                    <h3 class="paper-title">Autism Evolution Studies</h3>
+                    <p class="paper-description">From low functioning to high function: the evolution of autism spectrum development and cognitive pathways.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/Fromlowfunctioningtohighfunctiontheevolutionofautism by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/Fromlowfunctioningtohighfunctiontheevolutionofautism by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="neurodevelopmental">
+                    <span class="paper-category">Neurodevelopmental</span>
+                    <h3 class="paper-title">Down Syndrome Cognition Research</h3>
+                    <p class="paper-description">Understanding how individuals with Down Syndrome process knowledge and cognitive frameworks.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/Understanding How Peoplewith Down Syndrome Process Knowledgeand How Others can Understand It by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/Understanding How Peoplewith Down Syndrome Process Knowledgeand How Others can Understand It by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="neurodevelopmental">
+                    <span class="paper-category">Neurodevelopmental</span>
+                    <h3 class="paper-title">DOWNED ASD Research</h3>
+                    <p class="paper-description">Comprehensive analysis of autism spectrum disorder and Down syndrome intersections.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/DOWNEDASD by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/DOWNEDASD by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="neurodevelopmental">
+                    <span class="paper-category">Neurodevelopmental</span>
+                    <h3 class="paper-title">Surging Brain Studies</h3>
+                    <p class="paper-description">Exploration of neural surge patterns and cognitive enhancement in neurodevelopmental contexts.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/Surgingbrain by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/Surgingbrain by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <!-- Methylphenidate Research -->
+                <div class="paper-item" data-category="methylphenidate">
+                    <span class="paper-category">Methylphenidate</span>
+                    <h3 class="paper-title">Methylphenidate Synergy Research</h3>
+                    <p class="paper-description">Advanced studies on stimulant medication interactions and cognitive enhancement protocols.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/Methylphenidate Synergy Research Cole Everdark by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/Methylphenidate Synergy Research Cole Everdark by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="methylphenidate">
+                    <span class="paper-category">Methylphenidate</span>
+                    <h3 class="paper-title">Ritalin Method Protocols</h3>
+                    <p class="paper-description">Therapeutic applications and optimization of methylphenidate-based treatments.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/Ritlitilin Method Methylphenidate by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/Ritlitilin Method Methylphenidate by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="methylphenidate">
+                    <span class="paper-category">Methylphenidate</span>
+                    <h3 class="paper-title">Lowering Methylphenidate & IQ</h3>
+                    <p class="paper-description">Critical analysis of how reducing methylphenidate dosage can impact cognitive function and IQ.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/How Lowering Someone's Methylphenidate can Lower Their IQ by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/How Lowering Someone's Methylphenidate can Lower Their IQ by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="methylphenidate">
+                    <span class="paper-category">Methylphenidate</span>
+                    <h3 class="paper-title">Infinite Methylphenidate Case Study</h3>
+                    <p class="paper-description">The reality of infinite methylphenidate: 1142 case study with updated findings.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/The Reality of Infinite Methylphenidate 1142 Case Study UPDATED by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/The Reality of Infinite Methylphenidate 1142 Case Study UPDATED by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="methylphenidate">
+                    <span class="paper-category">Methylphenidate</span>
+                    <h3 class="paper-title">Stim Blasting Report</h3>
+                    <p class="paper-description">Final comprehensive report on stimulant optimization and cognitive enhancement protocols.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/Stim Blasting Report Cole Everdark Final by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/Stim Blasting Report Cole Everdark Final by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <!-- Amphetamine Studies -->
+                <div class="paper-item" data-category="amphetamine">
+                    <span class="paper-category">Amphetamine</span>
+                    <h3 class="paper-title">Amphetamines Over Sedatives</h3>
+                    <p class="paper-description">Comparative analysis of stimulant medications versus sedative treatments in therapeutic contexts.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/Amphetiminesoversedatives by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/Amphetiminesoversedatives by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="amphetamine">
+                    <span class="paper-category">Amphetamine</span>
+                    <h3 class="paper-title">What Amphetamine Life Feels Like</h3>
+                    <p class="paper-description">Subjective and objective analysis of amphetamine experiences and therapeutic applications.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/What Ampehtninelifefeelslike by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/What Ampehtninelifefeelslike by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="amphetamine">
+                    <span class="paper-category">Amphetamine</span>
+                    <h3 class="paper-title">Stimulant Medications & Neurodysplasia</h3>
+                    <p class="paper-description">Therapeutic potential of stimulant medications in managing neurodysplasia-associated peripheral swelling.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/Therapeutic Potentialof Stimulant Medicationsinthe Managementof Neurodysplasia Associated Peripheral Swelling by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/Therapeutic Potentialof Stimulant Medicationsinthe Managementof Neurodysplasia Associated Peripheral Swelling by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <!-- Consciousness & Psychedelic Research -->
+                <div class="paper-item" data-category="consciousness">
+                    <span class="paper-category">Consciousness</span>
+                    <h3 class="paper-title">Lysergic Acid Diethylamide Studies</h3>
+                    <p class="paper-description">Comprehensive exploration of LSD, consciousness expansion, and psychedelic research protocols.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/LYSERGICACIDDIETHYLAMIDE by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/LYSERGICACIDDIETHYLAMIDE by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="consciousness">
+                    <span class="paper-category">Consciousness</span>
+                    <h3 class="paper-title">Lightbulb Head Complete</h3>
+                    <p class="paper-description">Complete analysis of consciousness illumination and cognitive breakthrough phenomena.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/LIGHTBULBHEAD Complete by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/LIGHTBULBHEAD Complete by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="consciousness">
+                    <span class="paper-category">Consciousness</span>
+                    <h3 class="paper-title">Lightbulb Head Research</h3>
+                    <p class="paper-description">Foundational research on consciousness expansion and the lightbulb head phenomenon.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/LIGHTBULDHEAD by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/LIGHTBULDHEAD by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="consciousness">
+                    <span class="paper-category">Consciousness</span>
+                    <h3 class="paper-title">Recovering Memories</h3>
+                    <p class="paper-description">Advanced protocols for memory recovery and consciousness integration techniques.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/Recovering Memories Cole Everdark by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/Recovering Memories Cole Everdark by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <!-- Health & Safety Research -->
+                <div class="paper-item" data-category="health">
+                    <span class="paper-category">Health & Safety</span>
+                    <h3 class="paper-title">Sleep Deprivation Effects</h3>
+                    <p class="paper-description">Comprehensive analysis of sleep deprivation on cognitive and physical functioning.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/The Effectsof Sleep Deprivationon Cognitiveand Physical Functioning by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/The Effectsof Sleep Deprivationon Cognitiveand Physical Functioning by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="health">
+                    <span class="paper-category">Health & Safety</span>
+                    <h3 class="paper-title">Fentanyl Neurovascular Risk</h3>
+                    <p class="paper-description">Critical evaluation of fentanyl's potential to induce cerebral and peripheral complications.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/Fentanyland Neurovascular Risk a Critical Evaluationof its Potentialto Induce Cerebraland Peripheral Complications by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/Fentanyland Neurovascular Risk a Critical Evaluationof its Potentialto Induce Cerebraland Peripheral Complications by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="health">
+                    <span class="paper-category">Health & Safety</span>
+                    <h3 class="paper-title">Carcinogenic Substances Analysis</h3>
+                    <p class="paper-description">Study of carcinogenic substances and their impact on necronemothorax, black mold in lungs, and MRSA.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/A Brief Studyof Carcinogenic Substancesand Their Impacton Necronemothorax,black Moldinthe Lungs,and MRSA by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/A Brief Studyof Carcinogenic Substancesand Their Impacton Necronemothorax,black Moldinthe Lungs,and MRSA by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+
+                <div class="paper-item" data-category="health">
+                    <span class="paper-category">Health & Safety</span>
+                    <h3 class="paper-title">Everyone Has a Timezone</h3>
+                    <p class="paper-description">Research on circadian rhythms, temporal cognition, and individual chronobiology.</p>
+                    <div class="paper-meta">
+                        <span class="paper-author">Cole EverDark</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="/assets/pdfs/Everyonehasatimezone by Cole EverDark.pdf" class="action-btn primary" download>⬇ Download</a>
+                        <button class="action-btn view-pdf" data-pdf="/assets/pdfs/Everyonehasatimezone by Cole EverDark.pdf">👁 View</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <h3>No Papers Found</h3>
+                <p>Try adjusting your search or filter criteria.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- PDF Preview Modal -->
+    <div class="pdf-modal" id="pdfModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">PDF Preview</h3>
+                <button class="close-modal" id="closeModal">✕ Close</button>
+            </div>
+            <iframe class="pdf-viewer" id="pdfViewer"></iframe>
+        </div>
+    </div>
+
+    <footer class="footer-section">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="research.html">Research</a></li>
+                    <li><a href="creators.html">Creators</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="resources.html">Resources</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 1142 Established Dec 22nd 2019</p>
+            <p style="margin-top: 10px; color: #00D4FF; font-weight: bold;">An EverDark Production</p>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const paperItems = document.querySelectorAll('.paper-item');
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+        const papersGallery = document.getElementById('papersGallery');
+
+        let currentFilter = 'all';
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                currentFilter = button.dataset.filter;
+                applyFilters();
+            });
+        });
+
+        searchInput.addEventListener('input', () => {
+            applyFilters();
+        });
+
+        function applyFilters() {
+            const searchTerm = searchInput.value.toLowerCase();
+            let visibleCount = 0;
+
+            paperItems.forEach(item => {
+                const category = item.dataset.category;
+                const title = item.querySelector('.paper-title').textContent.toLowerCase();
+                const description = item.querySelector('.paper-description').textContent.toLowerCase();
+                
+                const matchesFilter = currentFilter === 'all' || category === currentFilter;
+                const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+
+                if (matchesFilter && matchesSearch) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            if (visibleCount === 0) {
+                papersGallery.style.display = 'none';
+                noResults.style.display = 'block';
+            } else {
+                papersGallery.style.display = 'grid';
+                noResults.style.display = 'none';
+            }
+        }
+
+        // PDF Modal functionality
+        const pdfModal = document.getElementById('pdfModal');
+        const pdfViewer = document.getElementById('pdfViewer');
+        const modalTitle = document.getElementById('modalTitle');
+        const closeModal = document.getElementById('closeModal');
+        const viewButtons = document.querySelectorAll('.view-pdf');
+
+        viewButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pdfPath = button.dataset.pdf;
+                const title = button.closest('.paper-item').querySelector('.paper-title').textContent;
+                
+                modalTitle.textContent = title;
+                pdfViewer.src = pdfPath;
+                pdfModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            pdfModal.classList.remove('active');
+            pdfViewer.src = '';
+            document.body.style.overflow = 'auto';
+        });
+
+        pdfModal.addEventListener('click', (e) => {
+            if (e.target === pdfModal) {
+                pdfModal.classList.remove('active');
+                pdfViewer.src = '';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Escape key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && pdfModal.classList.contains('active')) {
+                pdfModal.classList.remove('active');
+                pdfViewer.src = '';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>

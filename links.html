@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1142 - Links & Social Media | Tomorrow's Solutions Today</title>
+    <meta name="description" content="Connect with 1142 Labs across all platforms. Follow our research, photography, and community channels.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="stylesheet" href="assets/css/1142-ritual-system.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--near-black);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Particle Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: all;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--vortex-cyan);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--vortex-cyan);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .hero img {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 2rem;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px var(--vortex-cyan));
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--vortex-cyan), var(--cyber-pink), var(--vortex-cyan));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s linear infinite;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Links Container */
+        .links-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .link-category {
+            margin-bottom: 3rem;
+        }
+
+        .link-category h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--vortex-cyan);
+            text-shadow: 0 0 10px var(--vortex-cyan);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .link-category h2::before {
+            content: '═══◆═══';
+            font-size: 1rem;
+            color: var(--cyber-pink);
+        }
+
+        .link-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .link-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid rgba(0, 240, 255, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            display: block;
+        }
+
+        .link-card:hover {
+            border-color: var(--vortex-cyan);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+            transform: translateX(10px);
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .link-card:hover::before {
+            left: 100%;
+        }
+
+        .link-card h3 {
+            color: var(--vortex-cyan);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .link-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .link-url {
+            color: var(--cyber-pink);
+            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        .status-active {
+            background: rgba(74, 222, 128, 0.2);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+        }
+
+        .status-archive {
+            background: rgba(139, 115, 85, 0.2);
+            color: var(--sepia-tone);
+            border: 1px solid var(--sepia-tone);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="creators.html">Creators</a></li>
+            <li><a href="calculator.html">Calculator</a></li>
+            <li><a href="links.html">Links</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <img src="assets/1142labs-new-logo.png" alt="1142 LABS Logo" class="floating-logo">
+        <h1>1142 LABS NETWORK</h1>
+        <p>Connect with us across all platforms. Follow our research, creative projects, and community initiatives.</p>
+    </div>
+
+    <div class="links-container">
+        <!-- Main Website -->
+        <div class="link-category cosmic-section">
+            <h2>Main Hub</h2>
+            <div class="link-grid">
+                <a href="https://1142labs.com" class="link-card" target="_blank">
+                    <h3>🌐 1142 Labs Official</h3>
+                    <p>The primary research and development hub for cognitive liberation.</p>
+                    <span class="link-url">1142labs.com</span>
+                    <span class="status-badge status-active">● ACTIVE</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Research Sites -->
+        <div class="link-category cosmic-section">
+            <h2>Research Foundation</h2>
+            <div class="link-grid">
+                <a href="https://coleeverdark.wixstudio.com/research-foundation" class="link-card" target="_blank">
+                    <h3>📚 Research Foundation</h3>
+                    <p>Comprehensive archive of scientific breakthroughs and studies.</p>
+                    <span class="link-url">coleeverdark.wixstudio.com/research-foundation</span>
+                    <span class="status-badge status-active">● ACTIVE</span>
+                </a>
+                <a href="https://coleeverdark.wixsite.com/1142" class="link-card" target="_blank">
+                    <h3>🔬 1142 Archive</h3>
+                    <p>Historical documentation and legacy content.</p>
+                    <span class="link-url">coleeverdark.wixsite.com/1142</span>
+                    <span class="status-badge status-archive">◆ ARCHIVE</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Social Media -->
+        <div class="link-category cosmic-section">
+            <h2>Social Channels</h2>
+            <div class="link-grid">
+                <a href="https://www.youtube.com/@1142labs" class="link-card" target="_blank">
+                    <h3>📺 The 1142 Channel</h3>
+                    <p>Video documentation, experiments, and educational content.</p>
+                    <span class="link-url">youtube.com/@1142labs</span>
+                    <span class="status-badge status-active">● ACTIVE</span>
+                </a>
+                <a href="https://www.instagram.com/1142labs" class="link-card" target="_blank">
+                    <h3>📸 1142 Photography</h3>
+                    <p>Visual documentation and artistic exploration.</p>
+                    <span class="link-url">instagram.com/1142labs</span>
+                    <span class="status-badge status-active">● ACTIVE</span>
+                </a>
+                <a href="https://www.instagram.com/1142labs" class="link-card" target="_blank">
+                    <h3>🎨 1142 Instagram</h3>
+                    <p>Daily updates, behind-the-scenes, and community engagement.</p>
+                    <span class="link-url">instagram.com/1142labs</span>
+                    <span class="status-badge status-active">● ACTIVE</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Legacy Sites -->
+        <div class="link-category cosmic-section">
+            <h2>Legacy Archives</h2>
+            <div class="link-grid">
+                <a href="https://coleeverdark.wixsite.com/hopp" class="link-card" target="_blank">
+                    <h3>🗂️ HOPP Archive</h3>
+                    <p>Early project documentation and historical records.</p>
+                    <span class="link-url">coleeverdark.wixsite.com/hopp</span>
+                    <span class="status-badge status-archive">◆ ARCHIVE</span>
+                </a>
+                <a href="https://coleeverdark.wixsite.com/my-site-1" class="link-card" target="_blank">
+                    <h3>📖 Original Site</h3>
+                    <p>First iteration of the 1142 project.</p>
+                    <span class="link-url">coleeverdark.wixsite.com/my-site-1</span>
+                    <span class="status-badge status-archive">◆ ARCHIVE</span>
+                </a>
+                <a href="https://coleeverdark.wixsite.com/website-1" class="link-card" target="_blank">
+                    <h3>🌟 Website V1</h3>
+                    <p>Second generation platform.</p>
+                    <span class="link-url">coleeverdark.wixsite.com/website-1</span>
+                    <span class="status-badge status-archive">◆ ARCHIVE</span>
+                </a>
+                <a href="https://coleeverdark.wixsite.com/website" class="link-card" target="_blank">
+                    <h3>💫 Website V2</h3>
+                    <p>Third generation platform.</p>
+                    <span class="link-url">coleeverdark.wixsite.com/website</span>
+                    <span class="status-badge status-archive">◆ ARCHIVE</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Other Projects -->
+        <div class="link-category cosmic-section">
+            <h2>Related Projects</h2>
+            <div class="link-grid">
+                <a href="projects.html" class="link-card">
+                    <h3>🎮 1142 Game Studios</h3>
+                    <p>Interactive experiences and game development.</p>
+                    <span class="link-url">Coming Soon</span>
+                    <span class="status-badge status-archive">◆ IN DEVELOPMENT</span>
+                </a>
+                <a href="projects.html" class="link-card">
+                    <h3>💹 1142 Trading</h3>
+                    <p>Financial research and market analysis.</p>
+                    <span class="link-url">Coming Soon</span>
+                    <span class="status-badge status-archive">◆ IN DEVELOPMENT</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 1142 LABS | Tomorrow's Solutions Today</p>
+        <p class="cosmic-rune">═══◆═══</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">An EverDark Production</p>
+    </footer>
+
+    <script src="assets/js/1142-ritual-effects.js"></script>
+</body>
+</html>

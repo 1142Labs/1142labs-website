@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Other Projects | 1142 Labs Ecosystem</title>
+    <meta name="description" content="Explore the expanding 1142 Labs ecosystem - from game development to financial research.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="stylesheet" href="assets/css/1142-ritual-system.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--near-black);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: all;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--vortex-cyan);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--vortex-cyan);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero img {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 2rem;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px var(--vortex-cyan));
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--vortex-cyan), var(--cyber-pink), var(--purple-haze), var(--vortex-cyan));
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 4s linear infinite;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .projects-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .project-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid rgba(0, 240, 255, 0.3);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--vortex-cyan);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-icon {
+            font-size: 4rem;
+            filter: drop-shadow(0 0 15px var(--vortex-cyan));
+        }
+
+        .project-title {
+            flex: 1;
+        }
+
+        .project-title h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--vortex-cyan);
+            text-shadow: 0 0 15px var(--vortex-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title .subtitle {
+            color: var(--cyber-pink);
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .status-development {
+            background: rgba(252, 211, 77, 0.2);
+            color: var(--golden-glow);
+            border: 1px solid var(--golden-glow);
+        }
+
+        .status-planning {
+            background: rgba(109, 40, 217, 0.2);
+            color: var(--purple-haze);
+            border: 1px solid var(--purple-haze);
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 2rem 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        .features-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .features-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--vortex-cyan);
+            font-size: 1.5rem;
+        }
+
+        .project-footer {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 240, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .launch-date {
+            color: var(--cyber-pink);
+            font-weight: bold;
+        }
+
+        .project-link {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--vortex-cyan), var(--cyber-pink));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .project-link:hover {
+            box-shadow: 0 0 20px var(--vortex-cyan);
+            transform: scale(1.05);
+        }
+
+        .project-link.disabled {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            cursor: not-allowed;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .project-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .project-title h2 {
+                font-size: 2rem;
+            }
+
+            .project-footer {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="links.html">Links</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <img src="assets/1142labs-new-logo.png" alt="1142 LABS Logo" class="floating-logo">
+        <h1>1142 ECOSYSTEM</h1>
+        <p>Beyond research—exploring the infinite through games, finance, and digital innovation.</p>
+    </div>
+
+    <div class="projects-container">
+        <!-- 1142 Game Studios -->
+        <div class="project-card cosmic-section">
+            <div class="project-header">
+                <div class="project-icon">🎮</div>
+                <div class="project-title">
+                    <h2>1142 Game Studios</h2>
+                    <p class="subtitle">Interactive Consciousness Exploration</p>
+                </div>
+                <span class="project-status status-development">IN DEVELOPMENT</span>
+            </div>
+
+            <div class="project-description">
+                <p>1142 Game Studios is developing immersive interactive experiences that blend entertainment with consciousness exploration. Our games are designed to challenge perception, expand awareness, and provide unique cognitive experiences.</p>
+            </div>
+
+            <ul class="features-list">
+                <li>Psychedelic-inspired visual design and soundscapes</li>
+                <li>Narrative-driven gameplay exploring altered states</li>
+                <li>Educational elements based on 1142 research</li>
+                <li>VR/AR experiences for enhanced immersion</li>
+                <li>Community-driven content and modding support</li>
+            </ul>
+
+            <div class="project-footer">
+                <span class="launch-date">Expected Launch: 2027-2028</span>
+                <a href="#" class="project-link disabled">Coming Soon</a>
+            </div>
+        </div>
+
+        <!-- 1142 Trading -->
+        <div class="project-card cosmic-section">
+            <div class="project-header">
+                <div class="project-icon">💹</div>
+                <div class="project-title">
+                    <h2>1142 Trading</h2>
+                    <p class="subtitle">Financial Research & Market Analysis</p>
+                </div>
+                <span class="project-status status-development">IN DEVELOPMENT</span>
+            </div>
+
+            <div class="project-description">
+                <p>Applying the same rigorous analytical approach used in our neuroscience research to financial markets. 1142 Trading combines algorithmic analysis, pattern recognition, and strategic thinking to navigate complex market dynamics.</p>
+            </div>
+
+            <ul class="features-list">
+                <li>Cryptocurrency market analysis and research</li>
+                <li>Algorithmic trading strategy development</li>
+                <li>Educational resources for informed investing</li>
+                <li>Real-time market data visualization</li>
+                <li>Community trading insights and discussions</li>
+            </ul>
+
+            <div class="project-footer">
+                <span class="launch-date">Expected Launch: 2026-2027</span>
+                <a href="#" class="project-link disabled">Coming Soon</a>
+            </div>
+        </div>
+
+        <!-- Cole's Tab Corner -->
+        <div class="project-card cosmic-section">
+            <div class="project-header">
+                <div class="project-icon">📸</div>
+                <div class="project-title">
+                    <h2>Cole's Tab Corner</h2>
+                    <p class="subtitle">Visual Archives & Photography</p>
+                </div>
+                <span class="project-status status-planning">PLANNING</span>
+            </div>
+
+            <div class="project-description">
+                <p>A curated gallery of visual documentation from the 1142 journey. Cole's Tab Corner showcases photography, digital art, and visual records that capture the aesthetic and philosophical essence of the project.</p>
+            </div>
+
+            <ul class="features-list">
+                <li>High-resolution photography archives</li>
+                <li>Behind-the-scenes documentation</li>
+                <li>Digital art and generative visuals</li>
+                <li>Timeline-based visual storytelling</li>
+                <li>Limited edition prints and NFTs</li>
+            </ul>
+
+            <div class="project-footer">
+                <span class="launch-date">Expected Launch: 2026</span>
+                <a href="#" class="project-link disabled">Coming Soon</a>
+            </div>
+        </div>
+
+        <!-- 1142 Fortress HQ -->
+        <div class="project-card cosmic-section">
+            <div class="project-header">
+                <div class="project-icon">🏰</div>
+                <div class="project-title">
+                    <h2>1142 Fortress HQ</h2>
+                    <p class="subtitle">Physical Research Facility</p>
+                </div>
+                <span class="project-status status-planning">LONG-TERM VISION</span>
+            </div>
+
+            <div class="project-description">
+                <p>The ultimate goal: a dedicated physical facility for 1142 Labs research, community gatherings, and consciousness exploration. A fortress of knowledge, funded by crypto and built on the principles of cognitive liberation.</p>
+            </div>
+
+            <ul class="features-list">
+                <li>State-of-the-art research laboratories</li>
+                <li>Community event and workshop spaces</li>
+                <li>Archive and library of consciousness research</li>
+                <li>Retreat center for immersive experiences</li>
+                <li>Self-sufficient, off-grid capabilities</li>
+            </ul>
+
+            <div class="project-footer">
+                <span class="launch-date">Vision: 2030+</span>
+                <a href="#" class="project-link disabled">In Planning</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 1142 LABS | Ecosystem Projects</p>
+        <p class="cosmic-rune">═══◆═══</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">Building Tomorrow's Solutions Today</p>
+    </footer>
+
+    <script src="assets/js/1142-ritual-effects.js"></script>
+</body>
+</html>

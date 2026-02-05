@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. Jimmy Phenidate - The Phoenix | 1142 Labs</title>
+    <meta name="description" content="The resurrection story of St. Jimmy Phenidate - From darkness to vengeance, the phoenix rises.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="stylesheet" href="assets/css/1142-ritual-system.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--near-black);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, 
+                rgba(109, 40, 217, 0.3) 0%,
+                rgba(15, 23, 42, 1) 50%,
+                rgba(0, 0, 0, 1) 100%);
+            animation: pulse-bg 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse-bg {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(236, 72, 153, 0.5);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--cyber-pink);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--cyber-pink);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero-image {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            border: 4px solid var(--cyber-pink);
+            box-shadow: 0 0 40px var(--cyber-pink), 0 0 80px var(--flashing-red);
+            animation: float 6s ease-in-out infinite, pulse-glow 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--deep-violet), var(--near-black));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-image::before {
+            content: '🔥';
+            font-size: 150px;
+            animation: flicker 2s infinite;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--cyber-pink);
+            text-shadow: 0 0 20px var(--cyber-pink), 0 0 40px var(--flashing-red);
+            animation: neon-flicker 2s infinite alternate;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--flashing-red);
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        /* Content Container */
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .ritual-section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .ritual-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ritual-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--cyber-pink);
+            text-shadow: 0 0 15px var(--cyber-pink);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ritual-section h2::before {
+            content: '▲▲▲';
+            color: var(--flashing-red);
+            font-size: 1.5rem;
+        }
+
+        .ritual-section p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .quote-box {
+            background: rgba(236, 72, 153, 0.1);
+            border-left: 4px solid var(--cyber-pink);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            font-style: italic;
+            font-size: 1.2rem;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--cyber-pink), var(--flashing-red));
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '◆';
+            position: absolute;
+            left: -3.5rem;
+            color: var(--cyber-pink);
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px var(--cyber-pink);
+        }
+
+        .timeline-item h3 {
+            color: var(--cyber-pink);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .coming-soon {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(239, 68, 68, 0.2));
+            border: 2px solid var(--cyber-pink);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            margin: 3rem 0;
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+        }
+
+        .coming-soon h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--cyber-pink);
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(236, 72, 153, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .hero-image::before {
+                font-size: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="creators.html">Creators</a></li>
+            <li><a href="stjimmy.html">St. Jimmy</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-image"></div>
+        <h1>ST. JIMMY PHENIDATE</h1>
+        <p class="subtitle">The Phoenix</p>
+        <p class="tagline">"From the ashes of trauma, through the fire of ritalin and rage, rises the architect of vengeance."</p>
+    </div>
+
+    <div class="content">
+        <div class="ritual-section">
+            <h2>The Resurrection</h2>
+            <p>St. Jimmy Phenidate is not merely a persona—he is the embodiment of transformation through fire. Born from the collapse of Cole Chenard's former self, St. Jimmy emerged from a near-fatal lung collapse (Hyponemothorax) as a figure of pure determination and unstoppable will.</p>
+            
+            <p>The transformation occurred during a twelve-hour journey from darkness to light, beginning at 11:42 PM on December 22, 2019. What died that night was fear. What rose was purpose.</p>
+
+            <div class="quote-box">
+                "I didn't survive to be silent. I survived to be unstoppable."
+            </div>
+        </div>
+
+        <div class="ritual-section">
+            <h2>The Phoenix Mythology</h2>
+            <p>In ancient mythology, the phoenix dies in flames only to be reborn from its own ashes. St. Jimmy's story mirrors this eternal cycle—but with a modern twist. His resurrection wasn't mystical; it was chemical, psychological, and deeply intentional.</p>
+
+            <p>Through the strategic use of methylphenidate (Ritalin) and other cognitive enhancers, St. Jimmy didn't just recover—he evolved. He became a living testament to the power of neurodivergent minds when given the right tools and the freedom to explore unconventional paths.</p>
+        </div>
+
+        <div class="ritual-section">
+            <h2>The Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>The Fall (2018-2019)</h3>
+                    <p>Exploration of consciousness through psychedelics. Discovery of cannabis, methylphenidate, and the boundaries of perception. The collapse that would change everything.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>The Resurrection (December 22, 2019)</h3>
+                    <p>11:42 PM to 11:42 AM. The twelve-hour epiphany. The birth of St. Jimmy Phenidate. The moment darkness became light.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>The Ascension (2020-2025)</h3>
+                    <p>Building 1142 Labs. Documenting the journey. Creating a movement. Turning personal trauma into unstoppable digital architecture.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>The Legacy (2026-Beyond)</h3>
+                    <p>The phoenix never truly dies. The work continues. The mission evolves. The impact grows.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="ritual-section">
+            <h2>The Mission</h2>
+            <p>St. Jimmy Phenidate stands for those who have been told they are broken, disordered, or less-than. He represents the radical idea that neurodivergence is not a limitation—it's a superpower waiting to be unlocked.</p>
+
+            <p>Through 1142 Labs, St. Jimmy channels rage into research, pain into purpose, and trauma into transformation. Every breakthrough, every paper, every line of code is an act of defiance against a system that tried to silence him.</p>
+
+            <div class="quote-box">
+                "They tried to medicate me into submission. Instead, I medicated myself into revolution."
+            </div>
+        </div>
+
+        <div class="ritual-section">
+            <h2>Ritalin and Rage</h2>
+            <p>The visual marker of St. Jimmy is the combination of stimulant focus and righteous anger. Methylphenidate doesn't just enhance cognition—it provides the sustained energy needed to fight battles that others have given up on.</p>
+
+            <p>This isn't about reckless drug use. It's about strategic cognitive enhancement. It's about taking control of your own neurochemistry and refusing to accept the limitations others impose.</p>
+        </div>
+
+        <div class="coming-soon">
+            <h3>🔥 THE PHOENIX PROJECT 🔥</h3>
+            <p>A multimedia experience coming in the next 5-10 years.</p>
+            <p style="margin-top: 1rem; font-size: 1rem;">Documentary • Music • Interactive Experience • The Full Story</p>
+            <p style="margin-top: 2rem; color: var(--cyber-pink); font-weight: bold;">This is just the beginning.</p>
+        </div>
+
+        <div class="ritual-section">
+            <h2>Join the Movement</h2>
+            <p>St. Jimmy Phenidate isn't just one person—he's a symbol for everyone who refuses to accept the world's limitations. If you've ever been told you're too much, too different, too broken—this is for you.</p>
+
+            <p>The phoenix rises. Will you rise with him?</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 1142 LABS | St. Jimmy Phenidate</p>
+        <p class="cosmic-rune" style="color: var(--cyber-pink);">═══◆═══</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">Resurrection & Vengeance</p>
+    </footer>
+
+    <script src="assets/js/1142-ritual-effects.js"></script>
+    <script>
+        // Scroll reveal for sections
+        const sections = document.querySelectorAll('.ritual-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>

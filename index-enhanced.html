@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="/assets/favicon.png">
+    <meta name="description" content="1142 Labs - Tomorrow's Solutions Today - Breakthrough discoveries in neuroscience, pharmacology, and consciousness studies. Established Dec 22nd 2019.">
+    <meta name="keywords" content="1142 labs, neuroscience research, pharmacology, consciousness studies, Cole EverDark, withdrawal support, methylphenidate research">
+    <meta name="author" content="1142 Labs">
+    <meta property="og:title" content="1142 - Tomorrow's Solutions Today">
+    <meta property="og:description" content="Breakthrough discoveries in neuroscience, pharmacology, consciousness studies, and withdrawal support. 20 research papers by Cole EverDark. Established Dec 22nd 2019.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.1142labs.com/">
+    <meta property="og:image" content="https://www.1142labs.com/assets/og-image.png">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="800">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:site_name" content="1142 Labs">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="1142 - Tomorrow's Solutions Today">
+    <meta name="twitter:description" content="Breakthrough research in neuroscience, pharmacology, and consciousness. 20 papers, withdrawal support tools, and harm reduction resources.">
+    <meta name="twitter:image" content="https://www.1142labs.com/assets/og-image.png">
+    <link rel="canonical" href="https://www.1142labs.com/">
+    <title>1142 - Tomorrow's Solutions Today</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-cyan: #00D4FF;
+            --primary-purple: #9D00FF;
+            --primary-pink: #FF00E5;
+            --dark-bg: #0a0a0f;
+            --card-bg: #1a1a2e;
+            --text-light: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 50%, #0a0a0f 100%);
+            animation: bgShift 20s ease infinite;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-cyan);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--primary-cyan);
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6));
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo-text h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--primary-cyan), var(--primary-purple), var(--primary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(157, 0, 255, 0.8)); }
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            color: var(--primary-cyan);
+            letter-spacing: 2px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-cyan), var(--primary-purple));
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-cyan);
+            text-shadow: 0 0 10px var(--primary-cyan);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple), var(--primary-pink), var(--primary-cyan));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            line-height: 1.2;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .status-badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .badge {
+            padding: 0.7rem 1.5rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--primary-cyan);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 30px rgba(0, 212, 255, 0.5);
+        }
+
+        .badge.warning {
+            border-color: var(--primary-pink);
+            background: rgba(255, 0, 229, 0.1);
+            box-shadow: 0 0 20px rgba(255, 0, 229, 0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            margin-top: 2rem;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.4);
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(157, 0, 255, 0.6);
+        }
+
+        /* Quick Links Section */
+        .quick-links {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .link-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            color: inherit;
+            overflow: hidden;
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple), var(--primary-pink));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .link-card:hover::before {
+            opacity: 1;
+        }
+
+        .link-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
+        }
+
+        .link-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-cyan);
+        }
+
+        .link-card p {
+            font-size: 1rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Featured Section */
+        .featured {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(90deg, var(--primary-cyan), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .featured-card {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(157, 0, 255, 0.05));
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .featured-card:hover {
+            border-color: var(--primary-cyan);
+            box-shadow: 0 15px 50px rgba(0, 212, 255, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .featured-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-purple);
+        }
+
+        .featured-card p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: var(--primary-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: var(--primary-purple);
+            text-shadow: 0 0 10px var(--primary-purple);
+        }
+
+        /* Mission Section */
+        .mission {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .mission-content {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(157, 0, 255, 0.08));
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .mission-text {
+            font-size: 1.2rem;
+            margin: 1.5rem 0;
+            color: var(--primary-cyan);
+            letter-spacing: 1px;
+        }
+
+        .mission-text:last-child {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 15, 0.95);
+            border-top: 2px solid var(--primary-cyan);
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            color: var(--primary-cyan);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin: 0.5rem 0;
+        }
+
+        .footer-column a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary-cyan);
+            text-shadow: 0 0 10px var(--primary-cyan);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .footer-bottom p {
+            margin: 0.5rem 0;
+        }
+
+        .everdark {
+            color: var(--primary-cyan);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .logo-text h1 {
+                font-size: 1.5rem;
+            }
+
+            nav {
+                gap: 1rem;
+                justify-content: center;
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            nav a {
+                font-size: 0.85rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="/assets/1142labs-new-logo.png" alt="1142 Labs Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>1142 LABS</h1>
+                    <p>Tomorrow's Solutions Today</p>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html">HOME</a>
+                <a href="about.html">ABOUT</a>
+                <a href="research.html">RESEARCH</a>
+                <a href="creators.html">CREATORS</a>
+                <a href="resources.html">RESOURCES</a>
+                <a href="calculator.html">CALCULATOR</a>
+                <a href="posters.html">POSTERS</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Tomorrow's Solutions Today</h2>
+            <p>Advancing neuroscience, pharmacology, and consciousness research through rigorous scientific inquiry.</p>
+            <div class="status-badges">
+                <span class="badge">LAB STATUS: ACTIVE ✓</span>
+                <span class="badge warning">RESEARCH LEVEL: BREAKTHROUGH</span>
+                <span class="badge">STUDIES: ONGOING</span>
+            </div>
+            <a href="research.html" class="cta-button">EXPLORE OUR RESEARCH</a>
+        </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="quick-links">
+        <div class="links-grid">
+            <a href="research.html" class="link-card">
+                <h3>Research</h3>
+                <p>20 Breakthroughs by Cole EverDark</p>
+            </a>
+            <a href="creators.html" class="link-card">
+                <h3>Creators</h3>
+                <p>The Persona Matrix</p>
+            </a>
+            <a href="resources.html" class="link-card">
+                <h3>Resources</h3>
+                <p>Tools & Support</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Featured Content -->
+    <section class="featured">
+        <h2 class="section-title">Featured Content</h2>
+        <div class="featured-grid">
+            <div class="featured-card">
+                <h3>Latest Research</h3>
+                <p>Explore our comprehensive collection of breakthrough studies in neurodevelopment, pharmacology, and consciousness research.</p>
+                <a href="research.html" class="read-more">Explore Research →</a>
+            </div>
+            <div class="featured-card">
+                <h3>Creator Profiles</h3>
+                <p>Meet Cole Everdark and the Persona Matrix - the minds behind 1142 Labs' revolutionary work.</p>
+                <a href="creators.html" class="read-more">Meet Creators →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission">
+        <h2 class="section-title">Our Research Mission</h2>
+        <div class="mission-content">
+            <p class="mission-text">▲▲▲▲ Advancing knowledge through empirical research ▲▲▲▲</p>
+            <p class="mission-text">═══◆═══ Rigorous scientific methodology ═══◆═══</p>
+            <p class="mission-text">∞∞∞∞ Continuous pursuit of discovery ∞∞∞∞</p>
+            <p class="mission-text">1142 Labs is a research collective dedicated to breakthrough discoveries in neurodevelopment, pharmacology, and consciousness studies. Our work pushes the boundaries of scientific understanding.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="research.html">Research</a></li>
+                    <li><a href="creators.html">Creators</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="calculator.html">Calculator</a></li>
+                    <li><a href="posters.html">Posters</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 1142 Established Dec 22nd 2019</p>
+            <p class="everdark">An EverDark Production</p>
+        </div>
+    </footer>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ResearchOrganization",
+      "name": "1142 Labs",
+      "alternateName": "1142",
+      "url": "https://www.1142labs.com",
+      "logo": "https://www.1142labs.com/assets/1142labs-new-logo.png",
+      "description": "Tomorrow's Solutions Today - Breakthrough discoveries in neuroscience, pharmacology, consciousness studies, and withdrawal support. Established Dec 22nd 2019.",
+      "foundingDate": "2019-12-22",
+      "founder": {
+        "@type": "Person",
+        "name": "Cole EverDark"
+      },
+      "sameAs": [
+        "https://github.com/1142Labs"
+      ],
+      "knowsAbout": [
+        "Neuroscience",
+        "Pharmacology",
+        "Consciousness Studies",
+        "Methylphenidate Research",
+        "Withdrawal Support",
+        "Harm Reduction"
+      ]
+    }
+    </script>
+
+    <!-- Particle Animation Script -->
+    <script>
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

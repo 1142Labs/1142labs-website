@@ -1,0 +1,548 @@
+/* 
+ * 1142 LABS - RITUAL DESIGN SYSTEM
+ * Version 6.0 - Cosmic Unity
+ * "The Architecture of Cognitive Liberation"
+ */
+
+/* ========================================
+   CUSTOM PROPERTIES FOR GLOWING BORDERS
+   ======================================== */
+@property --bg-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+
+/* ========================================
+   COLOR PALETTE - RESURRECTION SPECTRUM
+   ======================================== */
+:root {
+  /* VORTEX Primary - Portal of Understanding */
+  --vortex-cyan: #00F0FF;
+  --vortex-blue: #0EA5E9;
+  --electric-blue: #3B82F6;
+  
+  /* VORTEX Secondary - Neon Fire and Vengeance */
+  --cyber-pink: #EC4899;
+  --hot-pink: #FF10F0;
+  --magenta: #D946EF;
+  
+  /* Foundation - The Void Before Epiphany */
+  --deep-violet: #1E1B4B;
+  --dark-gray: #0D1117;
+  --near-black: #0F172A;
+  
+  /* Status Indicator - Protocol Integrity */
+  --neon-green: #4ADE80;
+  --success-green: #10B981;
+  
+  /* Warning Accent - Data Breach or Health Risk */
+  --flashing-red: #EF4444;
+  --corrupted-black: #000000;
+  
+  /* Additional Ritual Colors */
+  --sepia-tone: #8B7355;
+  --golden-glow: #FCD34D;
+  --purple-haze: #6D28D9;
+  
+  /* Gradients */
+  --gradient-vortex: linear-gradient(135deg, var(--vortex-cyan), var(--cyber-pink));
+  --gradient-resurrection: linear-gradient(180deg, var(--deep-violet), var(--near-black));
+  --gradient-cosmic: radial-gradient(circle at center, var(--purple-haze) 0%, var(--near-black) 100%);
+}
+
+/* ========================================
+   MATRIX TEXT FALL ANIMATION
+   ======================================== */
+@keyframes matrix-fall {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.matrix-column {
+  position: absolute;
+  top: -100%;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: var(--vortex-cyan);
+  text-shadow: 0 0 8px var(--vortex-cyan);
+  animation: matrix-fall linear infinite;
+  opacity: 0.6;
+}
+
+/* ========================================
+   GLOWING BORDER ANIMATIONS
+   ======================================== */
+@keyframes spin {
+  to { --bg-angle: 360deg; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--vortex-cyan),
+                0 0 40px var(--vortex-cyan),
+                inset 0 0 20px rgba(0, 240, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--cyber-pink),
+                0 0 60px var(--cyber-pink),
+                inset 0 0 30px rgba(236, 72, 153, 0.1);
+  }
+}
+
+.ritual-border {
+  position: relative;
+  padding: 3px;
+  animation: spin 3s infinite linear;
+  background: conic-gradient(
+    from var(--bg-angle),
+    var(--vortex-cyan),
+    var(--cyber-pink),
+    var(--vortex-cyan)
+  );
+  border-radius: 12px;
+}
+
+.ritual-border-inner {
+  background: var(--near-black);
+  border-radius: 10px;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================
+   COSMIC GLYPHS & ASCII SCAFFOLDING
+   ======================================== */
+.cosmic-rune {
+  display: inline-block;
+  font-family: 'Courier New', monospace;
+  color: var(--vortex-cyan);
+  text-shadow: 0 0 10px var(--vortex-cyan);
+  animation: flicker 2s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.glyph-ascension::before {
+  content: '▲▲▲▲';
+  color: var(--vortex-cyan);
+  margin-right: 1rem;
+}
+
+.glyph-trials::before {
+  content: '═══◆═══';
+  color: var(--cyber-pink);
+  margin-right: 1rem;
+}
+
+.glyph-eternal::before {
+  content: '∞∞∞∞';
+  color: var(--neon-green);
+  margin-right: 1rem;
+}
+
+.glyph-scaffold::before {
+  content: '▬▬▬▬';
+  color: var(--purple-haze);
+  margin-right: 1rem;
+}
+
+/* ========================================
+   VHS STATIC & VAPORWAVE ATMOSPHERICS
+   ======================================== */
+.vhs-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.vhs-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(255, 255, 255, 0.05) 1px,
+    rgba(0, 0, 0, 0.1) 2px
+  );
+  pointer-events: none;
+  z-index: 1;
+  animation: vhs-scan 8s linear infinite;
+}
+
+@keyframes vhs-scan {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+/* ========================================
+   NEON TEXT EFFECTS
+   ======================================== */
+.neon-text {
+  color: var(--vortex-cyan);
+  text-shadow: 
+    0 0 10px var(--vortex-cyan),
+    0 0 20px var(--vortex-cyan),
+    0 0 30px var(--vortex-cyan),
+    0 0 40px var(--vortex-blue);
+  animation: neon-flicker 1.5s infinite alternate;
+}
+
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 
+      0 0 10px var(--vortex-cyan),
+      0 0 20px var(--vortex-cyan),
+      0 0 30px var(--vortex-cyan),
+      0 0 40px var(--vortex-blue);
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    var(--vortex-cyan),
+    var(--cyber-pink),
+    var(--vortex-cyan)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 3s linear infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ========================================
+   HOLOGRAPHIC EFFECTS
+   ======================================== */
+.holographic {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 240, 255, 0.1),
+    rgba(236, 72, 153, 0.1),
+    rgba(0, 240, 255, 0.1)
+  );
+  background-size: 200% 200%;
+  animation: holographic-shift 4s ease infinite;
+}
+
+@keyframes holographic-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.holographic::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* ========================================
+   RITUAL CARDS WITH ENHANCED EFFECTS
+   ======================================== */
+.ritual-card {
+  background: rgba(15, 23, 42, 0.8);
+  border: 2px solid rgba(0, 240, 255, 0.3);
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.ritual-card:hover {
+  border-color: var(--vortex-cyan);
+  box-shadow: 
+    0 0 20px rgba(0, 240, 255, 0.5),
+    0 0 40px rgba(236, 72, 153, 0.3),
+    inset 0 0 20px rgba(0, 240, 255, 0.1);
+  transform: translateY(-5px);
+}
+
+.ritual-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    var(--vortex-cyan),
+    var(--cyber-pink),
+    var(--purple-haze),
+    var(--vortex-cyan)
+  );
+  border-radius: 12px;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  background-size: 400% 400%;
+  animation: gradient-rotate 8s ease infinite;
+}
+
+.ritual-card:hover::before {
+  opacity: 0.7;
+}
+
+@keyframes gradient-rotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ========================================
+   COSMIC BUTTONS
+   ======================================== */
+.cosmic-btn {
+  position: relative;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--vortex-cyan), var(--cyber-pink));
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cosmic-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.cosmic-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.cosmic-btn:hover {
+  box-shadow: 
+    0 0 20px var(--vortex-cyan),
+    0 0 40px var(--cyber-pink);
+  transform: scale(1.05);
+}
+
+/* ========================================
+   PARALLAX LAYERS
+   ======================================== */
+.parallax-container {
+  position: relative;
+  overflow: hidden;
+  perspective: 1px;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.parallax-layer-back {
+  transform: translateZ(-1px) scale(2);
+}
+
+.parallax-layer-mid {
+  transform: translateZ(-0.5px) scale(1.5);
+}
+
+.parallax-layer-front {
+  transform: translateZ(0);
+}
+
+/* ========================================
+   FLOATING LOGO ANIMATION
+   ======================================== */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(2deg);
+  }
+}
+
+.floating-logo {
+  animation: float 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px var(--vortex-cyan));
+}
+
+/* ========================================
+   SKELETON LOADERS
+   ======================================== */
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+/* ========================================
+   STATUS INDICATORS
+   ======================================== */
+.status-online {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: var(--neon-green);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--neon-green);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+.status-warning {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: var(--flashing-red);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--flashing-red);
+  animation: flash 1s infinite;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+  .ritual-border-inner {
+    padding: 1rem;
+  }
+  
+  .cosmic-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .matrix-column {
+    font-size: 12px;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.text-vortex { color: var(--vortex-cyan); }
+.text-pink { color: var(--cyber-pink); }
+.text-green { color: var(--neon-green); }
+.text-warning { color: var(--flashing-red); }
+
+.bg-void { background: var(--near-black); }
+.bg-violet { background: var(--deep-violet); }
+.bg-gradient-vortex { background: var(--gradient-vortex); }
+.bg-gradient-cosmic { background: var(--gradient-cosmic); }
+
+.glow-cyan { box-shadow: 0 0 20px var(--vortex-cyan); }
+.glow-pink { box-shadow: 0 0 20px var(--cyber-pink); }
+.glow-green { box-shadow: 0 0 20px var(--neon-green); }
