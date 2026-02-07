@@ -100,8 +100,39 @@ class AI1142System {
             return this.cache.get(cacheKey);
         }
         
-        // In production, this would proxy through backend to protect API keys
-        // For now, return simulated responses
+        // Try real API first, fallback to simulated if unavailable
+        try {
+            const response = await fetch('/api/ai', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: model,
+                    prompt: prompt,
+                    page: document.body.dataset.page || 'unknown',
+                    temperature: options.temperature || 0.7
+                })
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                const result = data.content;
+                this.cache.set(cacheKey, result);
+                return result;
+            } else {
+                // API failed, use simulated response
+                console.warn('API unavailable, using simulated response');
+                return await this.getSimulatedResponse(model, prompt);
+            }
+        } catch (error) {
+            // Network error, use simulated response
+            console.warn('API error, using simulated response:', error);
+            return await this.getSimulatedResponse(model, prompt);
+        }
+    }
+    
+    async getSimulatedResponse(model, prompt) {
         const responses = {
             grok: await this.simulateGrokResponse(prompt),
             openai: await this.simulateOpenAIResponse(prompt),
@@ -109,7 +140,7 @@ class AI1142System {
         };
         
         const result = responses[model] || responses.grok;
-        this.cache.set(cacheKey, result);
+        this.cache.set(`${model}-${prompt}`, result);
         return result;
     }
     

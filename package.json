@@ -1,0 +1,15 @@
+{
+  "name": "1142labs-website",
+  "version": "1.0.0",
+  "description": "1142 LABS - Tomorrow's Answers Today",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  }
+}
