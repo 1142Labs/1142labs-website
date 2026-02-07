@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Gallery - 1142 LABS</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/3d-effects.css">
+    <link rel="stylesheet" href="assets/css/3d-glasses-glitch.css">
+    <link rel="stylesheet" href="assets/css/ai-styles.css">
+    <style>
+        .gallery-hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/spikey-background-pattern.png');
+            opacity: 0.1;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .gallery-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .video-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 255, 255, 0.8);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.3);
+        }
+        
+        .video-card video {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #000;
+        }
+        
+        .video-info {
+            padding: 1.5rem;
+        }
+        
+        .video-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #00FFFF;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        
+        .video-description {
+            color: #94A3B8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .video-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #FF00FF, #00FFFF);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00FFFF, #FF00FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #94A3B8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body data-page="gallery">
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <img src="assets/logo-spikey-original.png" alt="1142 LABS" style="height: 50px;">
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="history.html">History</a>
+                <a href="breakthroughs.html">Research</a>
+                <a href="chemicals.html">Database</a>
+                <a href="gallery.html" class="active">Gallery</a>
+                <a href="memorial.html">Memorial</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gallery-hero">
+        <div style="text-align: center; z-index: 10; position: relative;">
+            <h1 class="anaglyph-text" style="font-size: 4rem; margin-bottom: 1rem;">VISUAL GALLERY</h1>
+            <p style="font-size: 1.5rem; color: #00FFFF;">Cyberpunk Neuroscience in Motion</p>
+        </div>
+    </section>
+
+    <!-- Gallery Content -->
+    <div class="gallery-content">
+        <div class="section-header">
+            <h2 class="section-title">Immersive Visual Experience</h2>
+            <p class="section-subtitle">
+                A collection of AI-generated and curated videos that capture the essence of 1142 LABS—
+                where consciousness meets technology, where science meets art, and where the future is already here.
+            </p>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- Video 1 -->
+            <div class="video-card depth-card-3d">
+                <div class="video-badge">CYBERPUNK</div>
+                <video controls loop muted playsinline>
+                    <source src="assets/videos/1000101587.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h3 class="video-title">Neural Interface</h3>
+                    <p class="video-description">
+                        Glitching neon visuals representing the intersection of consciousness and digital reality.
+                        The boundary between mind and machine dissolves in electric cyan.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="video-card depth-card-3d">
+                <div class="video-badge">ABSTRACT</div>
+                <video controls loop muted playsinline>
+                    <source src="assets/videos/1000101588.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h3 class="video-title">Synaptic Flow</h3>
+                    <p class="video-description">
+                        Fluid motion capturing the dynamic nature of neural networks and neurotransmitter cascades.
+                        Consciousness in constant flux.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Video 3 -->
+            <div class="video-card depth-card-3d">
+                <div class="video-badge">TECH-NOIR</div>
+                <video controls loop muted playsinline>
+                    <source src="assets/videos/1000101589.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h3 class="video-title">Digital Consciousness</h3>
+                    <p class="video-description">
+                        The architecture of awareness rendered in neon and shadow. Where thought becomes light,
+                        and light becomes data.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Video 4 -->
+            <div class="video-card depth-card-3d">
+                <div class="video-badge">PSYCHEDELIC</div>
+                <video controls loop muted playsinline>
+                    <source src="assets/videos/1000101590.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h3 class="video-title">Altered States</h3>
+                    <p class="video-description">
+                        Visual representation of psychedelic consciousness expansion. The default mode network
+                        dissolves into infinite possibility.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Video 5 -->
+            <div class="video-card depth-card-3d">
+                <div class="video-badge">FEATURED</div>
+                <video controls loop muted playsinline>
+                    <source src="assets/videos/1000101591.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h3 class="video-title">Neon Genesis</h3>
+                    <p class="video-description">
+                        The birth of 1142—from a single moment at 11:42 PM to a digital laboratory exploring
+                        the frontiers of neuroscience.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Video 6 -->
+            <div class="video-card depth-card-3d">
+                <div class="video-badge">MOLECULAR</div>
+                <video controls loop muted playsinline>
+                    <source src="assets/videos/1000101592.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h3 class="video-title">Chemical Symphony</h3>
+                    <p class="video-description">
+                        Molecular structures in motion—methylphenidate, LSD, serotonin dancing in neon space.
+                        Chemistry as art.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Video 7 -->
+            <div class="video-card depth-card-3d">
+                <div class="video-badge">GLITCH</div>
+                <video controls loop muted playsinline>
+                    <source src="assets/videos/1000101593.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h3 class="video-title">System Corruption</h3>
+                    <p class="video-description">
+                        Digital artifacts and signal degradation. The beauty in breakdown, the art in error.
+                        Glitch as aesthetic.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Video 8 -->
+            <div class="video-card depth-card-3d">
+                <div class="video-badge">RETRO</div>
+                <video controls loop muted playsinline>
+                    <source src="assets/videos/1000101594.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h3 class="video-title">Retrowave Dreams</h3>
+                    <p class="video-description">
+                        80s-inspired futurism meets modern neuroscience. Sunset gradients and grid lines
+                        frame the exploration of consciousness.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Video 9 -->
+            <div class="video-card depth-card-3d">
+                <div class="video-badge">COSMIC</div>
+                <video controls loop muted playsinline>
+                    <source src="assets/videos/1000101595.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h3 class="video-title">Cosmic Cognition</h3>
+                    <p class="video-description">
+                        The universe within the mind. Neural networks that mirror galactic structures.
+                        Consciousness as cosmic phenomenon.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Video 10 -->
+            <div class="video-card depth-card-3d">
+                <div class="video-badge">EXPERIMENTAL</div>
+                <video controls loop muted playsinline>
+                    <source src="assets/videos/f28b66af-80f7-444d-a125-4a1ce62ba072-1_all_80540.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h3 class="video-title">Laboratory Visions</h3>
+                    <p class="video-description">
+                        Experimental footage from the digital laboratory. Raw, unfiltered, authentic.
+                        The essence of 1142 in motion.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #0F172A; padding: 3rem 2rem; text-align: center; margin-top: 5rem; border-top: 2px solid rgba(0, 255, 255, 0.3);">
+        <p style="color: #94A3B8; margin-bottom: 1rem;">
+            1142 LABS - Tomorrow's Answers Today
+        </p>
+        <p style="color: #64748B; font-size: 0.9rem;">
+            Founded December 22, 2019 | Exploring Consciousness Through Science
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/particles.min.js"></script>
+    <script src="assets/js/webgl-shaders.js"></script>
+    <script src="assets/js/3d-glitch-effects.js"></script>
+    <script src="assets/js/ai-integration.js"></script>
+    
+    <script>
+        // Auto-play videos on scroll into view
+        const videos = document.querySelectorAll('video');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.play();
+                } else {
+                    entry.target.pause();
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        videos.forEach(video => observer.observe(video));
+        
+        // Add 3D tilt effect to cards
+        const cards = document.querySelectorAll('.video-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
