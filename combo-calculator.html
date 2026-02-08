@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combo Calculator | 1142 LABS</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/3d-glasses-glitch.css">
+    <link rel="stylesheet" href="assets/css/ai-styles.css">
+    <link rel="stylesheet" href="assets/css/advanced-features.css">
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+        }
+
+        .calculator-container {
+            max-width: 900px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .header-section p {
+            font-size: 1.1rem;
+            color: #aaa;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .truth-banner {
+            background: rgba(255,0,0,0.05);
+            border: 1px solid rgba(255,0,0,0.3);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 40px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .truth-banner-icon {
+            color: #ff3333;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .truth-banner-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ff3333;
+            font-size: 16px;
+        }
+
+        .truth-banner-text {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .selection-interface {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .substance-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .substance-select-wrapper label {
+            display: block;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #888;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .substance-select-wrapper select {
+            width: 100%;
+            padding: 16px;
+            background: #0a0a0a;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .substance-select-wrapper select:hover {
+            border-color: rgba(0,255,255,0.5);
+        }
+
+        .plus-sign {
+            font-size: 24px;
+            color: #555;
+            margin-top: 24px;
+        }
+
+        .analyze-btn {
+            width: 100%;
+            padding: 18px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .analyze-btn:hover:not(:disabled) {
+            background: rgba(0,255,255,0.2);
+            border-color: #00ffff;
+            box-shadow: 0 0 20px rgba(0,255,255,0.3);
+        }
+
+        .analyze-btn:disabled {
+            background: rgba(255,255,255,0.03);
+            border-color: rgba(255,255,255,0.1);
+            color: #555;
+            cursor: not-allowed;
+        }
+
+        .results-container {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .results-container.active {
+            display: grid;
+            gap: 30px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .risk-card {
+            border-radius: 8px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .risk-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 12px 24px;
+            color: #000;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .risk-card h2 {
+            margin: 40px 0 12px 0;
+            font-size: 28px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .risk-card p {
+            margin: 0;
+            font-size: 18px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .info-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .info-card h3 {
+            margin: 0 0 20px 0;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-card-icon {
+            font-size: 20px;
+        }
+
+        .effect-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .effect-list li {
+            padding: 12px;
+            margin-bottom: 8px;
+            background: rgba(255,255,255,0.03);
+            border-left: 3px solid;
+            border-radius: 4px;
+        }
+
+        .effect-list.perceived li {
+            border-left-color: rgba(0,255,136,0.5);
+        }
+
+        .effect-list.costs li {
+            border-left-color: rgba(255,100,0,0.5);
+        }
+
+        .pathway-steps {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .pathway-step {
+            padding: 10px 18px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .pathway-arrow {
+            color: #555;
+        }
+
+        .danger-box {
+            background: rgba(255,0,0,0.1);
+            border: 1px solid rgba(255,0,0,0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .danger-box-title {
+            font-weight: 600;
+            color: #ff3333;
+            margin-bottom: 8px;
+        }
+
+        .flags-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+        }
+
+        .flags-list li {
+            padding: 8px 0;
+            font-size: 14px;
+            color: #ffaa00;
+        }
+
+        @media (max-width: 768px) {
+            .header-section h1 { font-size: 2.5rem; }
+            .substance-grid { grid-template-columns: 1fr; }
+            .plus-sign { display: none; }
+            .calculator-container { margin-top: 80px; }
+        }
+    </style>
+</head>
+<body data-page="combo-calculator">
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo anaglyph-text">1142 LABS</a>
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="breakthroughs.html">RESEARCH</a></li>
+                <li><a href="chemicals.html">DATABASE</a></li>
+                <li><a href="combo-calculator.html" class="active">COMBO CALC</a></li>
+                <li><a href="gallery.html">GALLERY</a></li>
+                <li><a href="vision.html">VISION</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="calculator-container">
+        <!-- Header -->
+        <div class="header-section">
+            <h1 class="anaglyph-text glitch-text">COMBO CALCULATOR</h1>
+            <p>
+                A harm-reduction intelligence layer analyzing substance interaction patterns.
+                <br />Educational use only. Not medical advice.
+            </p>
+        </div>
+
+        <!-- Critical Truth Banner -->
+        <div class="truth-banner">
+            <div class="truth-banner-icon">⚠️</div>
+            <div>
+                <div class="truth-banner-title">Primary Risk: Psychological Destabilization</div>
+                <p class="truth-banner-text">
+                    For these combinations, the greatest danger is not physical toxicity, but the destabilization of cognition, emotion, and reality perception. Perceived benefits often peak immediately before self-monitoring fails.
+                </p>
+            </div>
+        </div>
+
+        <!-- Selection Interface -->
+        <div class="selection-interface">
+            <div class="substance-grid">
+                <div class="substance-select-wrapper">
+                    <label>Substance A</label>
+                    <select id="substance1">
+                        <option value="">Select...</option>
+                    </select>
+                </div>
+
+                <div class="plus-sign">+</div>
+
+                <div class="substance-select-wrapper">
+                    <label>Substance B</label>
+                    <select id="substance2">
+                        <option value="">Select...</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="analyze-btn" id="analyzeBtn" disabled>Analyze Interaction</button>
+        </div>
+
+        <!-- Results Container -->
+        <div class="results-container" id="results">
+            <!-- Risk Classification Card -->
+            <div class="risk-card" id="riskCard">
+                <div class="risk-badge" id="riskBadge"></div>
+                <h2 id="comboTitle"></h2>
+                <p id="comboProfile"></p>
+            </div>
+
+            <!-- Perceived Effects -->
+            <div class="info-card">
+                <h3><span class="info-card-icon">🧠</span> Perceived Effects</h3>
+                <ul class="effect-list perceived" id="perceivedEffects"></ul>
+            </div>
+
+            <!-- Cognitive Costs -->
+            <div class="info-card">
+                <h3><span class="info-card-icon">⚠️</span> Cognitive Costs</h3>
+                <ul class="effect-list costs" id="cognitiveCosts"></ul>
+            </div>
+
+            <!-- Breakdown Pathway -->
+            <div class="info-card">
+                <h3><span class="info-card-icon">📉</span> Breakdown Pathway</h3>
+                <div class="pathway-steps" id="breakdownPathway"></div>
+            </div>
+
+            <!-- Primary Danger -->
+            <div class="info-card">
+                <div class="danger-box">
+                    <div class="danger-box-title">⚠️ Primary Danger</div>
+                    <p id="primaryDanger" style="margin: 0; color: #ccc;"></p>
+                    <ul class="flags-list" id="flags"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/combo-calculator-data.js"></script>
+    <script src="assets/js/ai-integration.js"></script>
+    <script src="assets/js/3d-glitch-effects.js"></script>
+    <script src="assets/js/advanced-features.js"></script>
+</body>
+</html>
